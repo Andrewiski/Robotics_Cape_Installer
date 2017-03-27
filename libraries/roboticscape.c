@@ -40,9 +40,10 @@ void shutdown_signal_handler(int signo);
 * sets up necessary hardware and software
 * should be the first thing your program calls
 *******************************************************************************/
+rc_bb_model_t model;
 int rc_initialize(){
 	FILE *fd; 
-	rc_bb_model_t model;
+    
 
 	// ensure root privaleges until we sort out udev rules
 	if(geteuid()!=0){
@@ -59,6 +60,7 @@ int rc_initialize(){
 
 	// whitelist blue, black, and black wireless only when RC device tree is in use
 	model = rc_get_bb_model();
+    
 	if(model!=BB_BLACK_RC && model!=BB_BLACK_W_RC && model!=BB_BLUE){
 		// also check uEnv.txt in case using older device tree
 		if(system("grep -q roboticscape /boot/uEnv.txt")!=0){
@@ -121,9 +123,11 @@ int rc_initialize(){
 	if(init_eqep(1)){
 		fprintf(stderr,"WARNING: failed to initialize eQEP1\n");
 	}
-	if(init_eqep(2)){
-		fprintf(stderr,"WARNING: failed to initialize eQEP2\n");
-	}
+    if (rc_model() != BB_GREEN_W) {
+        if (init_eqep(2)) {
+            fprintf(stderr, "WARNING: failed to initialize eQEP2\n");
+        }
+    }
 
 	// motors
 	#ifdef DEBUG
@@ -171,6 +175,10 @@ int rc_initialize(){
 	rc_usleep(10000);
 
 	return 0;
+}
+
+int rc_model() {
+    return model;
 }
 
 /*******************************************************************************
@@ -360,9 +368,24 @@ int rc_get_encoder_pos(int ch){
 		return -1;
 	}
 	// 4th channel is counted by the PRU not eQEP
-	if(ch==4) return get_pru_encoder_pos();
+    
+    if (ch == 4) {
+        if (rc_model() != BB_GREEN_W) {
+            return get_pru_encoder_pos();
+        }
+        else {
+            return 0;
+        }
+    }
 	// first 3 channels counted by eQEP
-	return  read_eqep(ch-1);
+    if (ch == 3 && rc_model() == BB_GREEN_W) {
+        return   0;
+    }
+    else {
+        return        read_eqep(ch - 1);
+    }
+
+	
 }
 
 /*******************************************************************************
@@ -376,9 +399,14 @@ int rc_set_encoder_pos(int ch, int val){
 		return -1;
 	}
 	// 4th channel is counted by the PRU not eQEP
-	if(ch==4) return set_pru_encoder_pos(val);
+	if(ch==4 && rc_model() != BB_GREEN_W) return set_pru_encoder_pos(val);
 	// else write to eQEP
-	return write_eqep(ch-1, val);
+    if (ch == 3 && rc_model() == BB_GREEN_W) {
+        return 0;
+    }
+    else {
+        return write_eqep(ch - 1, val);
+    }
 }
 
 /*******************************************************************************

@@ -107,7 +107,7 @@ int rc_cleanup();		// call at the end of main()
 int rc_kill();	// not usually necessary, use kill_robot example instead
 void rc_disable_signal_handler();
 void rc_enable_signal_handler();
-
+int rc_model();   //BBGW is using PRU_ENC and QEP2, Bat LED1 and Batt LED2 pins tied to Wifi so this boolean is used to avoid conflicts
 
 /*******************************************************************************
 * FLOW STATE FOR HIGH LEVEL PROGRAM CONTROL

@@ -73,6 +73,8 @@
 #define BATT_LED_2_BLUE 11 // different on BB Blue
 #define BATT_LED_3	61 // P8.26
 #define BATT_LED_4	26 // P8.14
+#define BATT_LED_1_BBGW 66 // Avoid BBGW Wifi reuse RED_LED For Now
+#define BATT_LED_2_BBGW 67 // Avoid BBGW Wifi reuse Green_LED for Now
 
 #define DC_JACK_OFFSET -0.15
 #define LIPO_OFFSET -0.10
