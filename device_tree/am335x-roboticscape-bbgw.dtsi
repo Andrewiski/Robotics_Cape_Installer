@@ -1,8 +1,7 @@
 /*******************************************************************************
 * pinmux and modules used by roboticscape
 * included in:
-* am335x-boneblack-roboticscape.dts
-* am335x-boneblack-wireless-roboticscape.dts
+* am335x-bonegreen-wireless-roboticscape.dts
 *******************************************************************************/
 
 

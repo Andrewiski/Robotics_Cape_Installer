@@ -7,7 +7,7 @@
 ################################################################################
 # Variables collected here for convenience
 ################################################################################
-
+TREE_BBGW_RC=am335x-bonegreen-wireless-roboticscape.dtb
 KERNEL="$(uname -r)"
 DEBIAN="$(cat /etc/debian_version)"
 MODEL="$(cat /proc/device-tree/model)"
@@ -102,6 +102,12 @@ if [ ! "$MODEL" == "TI AM335x BeagleBone Green Wireless" ]; then
 	systemctl enable rc_battery_monitor
 	echo "Starting rc_battery_monitor Service"
 	systemctl start rc_battery_monitor
+else
+# for no as bbgw dts is not in the base image copy the dts files and compile to dtbs so we have it available for use
+    echo "dts building the BBGW overlay"
+    cp device_tree/am335x-roboticscape-bbgw.dtsi /opt/source/dtb-4.4-ti/src/arm/am335x-roboticscape-bbgw.dtsi
+    cp device_tree/am335x-bonegreen-wireless-roboticscape.dts /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dts
+    dts -o "/boot/dtbs/$UNAME/$TREE_BBGW_RC" -O dtb -i "/opt/source/dtb-4.4-ti/src/arm"   /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dts
 fi
 
 echo "Configuring Device Tree"

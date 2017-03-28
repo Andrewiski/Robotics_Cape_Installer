@@ -3,6 +3,7 @@
 OVERLAY=RoboticsCape
 TREE_BLACK_RC=am335x-boneblack-roboticscape.dtb
 TREE_BW_RC=am335x-boneblack-wireless-roboticscape.dtb
+TREE_BBGW_RC=am335x-bonegreen-wireless-roboticscape.dtb
 UENV=/boot/uEnv.txt
 
 KERNEL="$(uname -r)"
@@ -95,7 +96,16 @@ elif   [ "$MODEL" == "TI AM335x BeagleBone Black" ]; then
 		echo "ERROR, can't find $TREE_BLACK_RC for this kernel."
 		echo "no changes made to uEnv.txt"
 	fi
-	
+# test for BBGW
+elif   [ "$MODEL" == "TI AM335x BeagleBone Green Wireless" ]; then
+
+	# if the roboticscape tree is available, use that
+	if [ -a "/boot/dtbs/$UNAME/$TREE_BBGW_RC" ]; then
+		DTB="$TREE_BBGW_RC"
+	else
+		echo "ERROR, can't find $TREE_BBGW_RC for this kernel."
+		echo "no changes made to uEnv.txt"
+	fi	
 # for all others (green, etc) make sure the force argument was given, 
 # otherwise use the black_rc_overlay
 else  
