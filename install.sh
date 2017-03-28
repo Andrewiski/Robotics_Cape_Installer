@@ -107,7 +107,7 @@ else
     echo "dts building the BBGW overlay"
     cp device_tree/am335x-roboticscape-bbgw.dtsi /opt/source/dtb-4.4-ti/src/arm/am335x-roboticscape-bbgw.dtsi
     cp device_tree/am335x-bonegreen-wireless-roboticscape.dts /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dts
-    dts -o "/boot/dtbs/$UNAME/$TREE_BBGW_RC" -O dtb -i "/opt/source/dtb-4.4-ti/src/arm"   /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dts
+    dtc -o "/boot/dtbs/$UNAME/$TREE_BBGW_RC" -O dtb -i "/opt/source/dtb-4.4-ti/src/arm"   /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dts
 fi
 
 echo "Configuring Device Tree"
