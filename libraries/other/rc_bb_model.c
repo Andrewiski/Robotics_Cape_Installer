@@ -51,6 +51,7 @@ rc_bb_model_t rc_get_bb_model_from_device_tree(){
     else if(strcmp(c, "TI AM335x BeagleBone Black Wireless RoboticsCape")==0) model=BB_BLACK_W_RC;
     else if(strcmp(c, "TI AM335x BeagleBone Green"				)==0) model=BB_GREEN;
     else if(strcmp(c, "TI AM335x BeagleBone Green Wireless"		)==0) model=BB_GREEN_W;
+    else if (strcmp(c, "TI AM335x BeagleBone Green Wireless RoboticsCape") == 0) model = BB_GREEN_W;
     else model = UNKNOWN_MODEL;
 
     // mark has-checked as 1 to prevent future slow checks
