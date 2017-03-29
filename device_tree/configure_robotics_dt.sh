@@ -3,6 +3,7 @@
 OVERLAY=RoboticsCape
 TREE_BLACK_RC=am335x-boneblack-roboticscape.dtb
 TREE_BW_RC=am335x-boneblack-wireless-roboticscape.dtb
+OVERLAYBBGW=RoboticsCapeBBGW
 TREE_BBGW_RC=am335x-bonegreen-wireless-roboticscape.dtb
 UENV=/boot/uEnv.txt
 
@@ -73,7 +74,10 @@ elif   [ "$MODEL" == "TI AM335x BeagleBone Black Wireless RoboticsCape" ]; then
 	echo "Detected BB Black Wireless with RoboticsCape device tree already installed\n"
 	echo "No changes required\n"
 	exit 0
-
+elif   [ "$MODEL" == "TI AM335x BeagleBone Green Wireless RoboticsCape" ]; then
+	echo "Detected BB Green Wireless with RoboticsCapeBBGW device tree already installed\n"
+	echo "No changes required\n"
+	exit 0
 
 # test for BBB wireless
 elif   [ "$MODEL" == "TI AM335x BeagleBone Black Wireless" ]; then
@@ -81,6 +85,7 @@ elif   [ "$MODEL" == "TI AM335x BeagleBone Black Wireless" ]; then
 	# if the roboticscape tree is available, use that
 	if [ -a "/boot/dtbs/$UNAME/$TREE_BW_RC" ]; then
 		DTB="$TREE_BW_RC"
+        OV="$OVERLAYBBGW"
 	else
 		echo "ERROR, can't find $TREE_BW_RC for this kernel."
 		echo "no changes made to uEnv.txt"
@@ -92,6 +97,7 @@ elif   [ "$MODEL" == "TI AM335x BeagleBone Black" ]; then
 	# if the roboticscape tree is available, use that
 	if [ -a "/boot/dtbs/$UNAME/$TREE_BLACK_RC" ]; then
 		DTB="$TREE_BLACK_RC"
+        OV="$OVERLAY"
 	else
 		echo "ERROR, can't find $TREE_BLACK_RC for this kernel."
 		echo "no changes made to uEnv.txt"
@@ -102,6 +108,7 @@ elif   [ "$MODEL" == "TI AM335x BeagleBone Green Wireless" ]; then
 	# if the roboticscape tree is available, use that
 	if [ -a "/boot/dtbs/$UNAME/$TREE_BBGW_RC" ]; then
 		DTB="$TREE_BBGW_RC"
+        OV="$OVERLAYBBGW"
 	else
 		echo "ERROR, can't find $TREE_BBGW_RC for this kernel."
 		echo "no changes made to uEnv.txt"
@@ -120,6 +127,7 @@ else
 		# if the roboticscape tree is available, use that
 		if [ -a "/boot/dtbs/$UNAME/$TREE_BLACK_RC" ]; then
 			DTB="$TREE_BLACK_RC"
+            OV="$OVERLAY"
 			echo "Forcing use of $TREE_BLACK_RC on untested board!"
 		else
 			echo "ERROR, can't find $TREE_BLACK_RC for this kernel."
@@ -164,9 +172,9 @@ echo cmdline=coherent_pool=1M >> $UENV
 
 # if not using custom device tree, load the overlay
 if [ "$DTB" != "$TREE_BLACK_RC" ] && [ "$DTB" != "$TREE_BW_RC" ]; then
-	echo cape_enable=bone_capemgr.enable_partno=$OVERLAY >> $UENV
+	echo cape_enable=bone_capemgr.enable_partno=$OV >> $UENV
 	# modify default cape to load in case missing from initramfs
-	echo CAPE=$OVERLAY > /etc/default/capemgr
+	echo CAPE=$OV > /etc/default/capemgr
 	echo "enabling overlay"
 fi
 
