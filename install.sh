@@ -97,15 +97,16 @@ systemctl daemon-reload
 echo "Enabling roboticscape Service"
 systemctl enable roboticscape
 # don't enable battery_monitor on BB Green Wireless
-if [ ! "$MODEL" == "TI AM335x BeagleBone Green Wireless" ]; then
-	echo "Enabling rc_battery_monitor Service"
+if [ "$MODEL" == "TI AM335x BeagleBone Green Wireless"  || "$MODEL" == "TI AM335x BeagleBone Green Wireless RoboticsCape"]; then
+    # for now run script to build bbgw overlays as they are not in the debian image 
+    echo "Building the BBGW overlays"
+    bash device_tree/build_bbgw_robotics_capes.sh	
+else
+
+    echo "Enabling rc_battery_monitor Service"
 	systemctl enable rc_battery_monitor
 	echo "Starting rc_battery_monitor Service"
-	systemctl start rc_battery_monitor
-else
-# for now run script to build bbgw overlays as they are not in the debian image copy the dts files and compile to dtbs so we have it available for use
-    echo "Building the BBGW overlays"
-    bash device_tree/build_bbgw_robotics_capes.sh 
+	systemctl start rc_battery_monitor 
 fi
 
 echo "Configuring Device Tree"
