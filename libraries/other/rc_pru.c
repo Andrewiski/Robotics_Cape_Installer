@@ -53,7 +53,7 @@ int initialize_pru(){
 	// if pru0 is not loaded, load it
     //BBGW has a conflivt with PRU0 so don't load if BBGW
     
-	if(rc_model() != BB_GREEN_W && access(PRU0_UEVENT, F_OK)!=0){
+	if(rc_get_bb_model() != BB_GREEN_W && access(PRU0_UEVENT, F_OK)!=0){
 		if(write(bind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
 			printf("ERROR: pru0 bind failed\n");
 			return -1;
@@ -122,7 +122,7 @@ int restart_pru(){
 
 
 	// if pru0 is loaded, unload it
-	if(rc_model() != BB_GREEN_W &&  access(PRU0_UEVENT, F_OK)==0){
+	if(rc_get_bb_model() != BB_GREEN_W &&  access(PRU0_UEVENT, F_OK)==0){
 		//printf("unbinding pru0\n");
 		if(write(unbind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
 			printf("ERROR: pru0 unbind failed\n");
@@ -139,7 +139,7 @@ int restart_pru(){
 	}
 
 	// now bind both
-	if(rc_model() != BB_GREEN_W &&  write(bind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
+	if(rc_get_bb_model() != BB_GREEN_W &&  write(bind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
 		printf("ERROR: pru0 bind failed\n");
 		return -1;
 	}
@@ -160,7 +160,7 @@ int restart_pru(){
 * returns the encoder position or -1 if there was a problem.
 *******************************************************************************/
 int get_pru_encoder_pos(){
-    if (rc_model() == BB_GREEN_W) {
+    if (rc_get_bb_model() == BB_GREEN_W) {
         return 0;
     }
 	if(prusharedMem_32int_ptr == NULL) return -1;
@@ -173,7 +173,7 @@ int get_pru_encoder_pos(){
 * Set the encoder position, return 0 on success, -1 on failure.
 *******************************************************************************/
 int set_pru_encoder_pos(int val){
-    if (rc_model() == BB_GREEN_W) {
+    if (rc_get_bb_model() == BB_GREEN_W) {
         return 0;
     }
 	if(prusharedMem_32int_ptr == NULL) return -1;

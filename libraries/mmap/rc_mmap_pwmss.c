@@ -5,7 +5,7 @@
 #include "rc_mmap_pwmss.h"
 #include "rc_tipwmss.h"
 #include "../preprocessor_macros.h"
-
+#include "../roboticscape.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -141,7 +141,10 @@ int init_eqep(int ss){
 	if(eqep_initialized[ss]){
 		return 0;
 	}
-
+    // ti-eqep 2 is disabled on BBGW
+    if (rc_get_bb_model() == BB_GREEN_W && ss == 2) {
+        return 0;
+    }
 	// check ti-eqep driver is up
 	switch(ss){
 	case 0:
@@ -204,12 +207,20 @@ int init_eqep(int ss){
 
 // read a value from eQEP counter
 int read_eqep(int ch){
+    // ti-eqep 2 is disabled on BBGW
+    if (rc_get_bb_model() == BB_GREEN_W && ch == 2) {
+        return 0;
+    }
 	if(init_eqep(ch)) return -1;
 	return  *(int*)(pwm_base[ch] + EQEP_OFFSET +QPOSCNT);
 }
 
 // write a value to the eQEP counter
 int write_eqep(int ch, int val){
+    // ti-eqep 2 is disabled on BBGW
+    if (rc_get_bb_model() == BB_GREEN_W && ch == 2) {
+        return 0;
+    }
 	if(init_eqep(ch)) return -1;
 	*(int*)(pwm_base[ch] + EQEP_OFFSET +QPOSCNT) = val;
 	return 0;

@@ -40,10 +40,10 @@ void shutdown_signal_handler(int signo);
 * sets up necessary hardware and software
 * should be the first thing your program calls
 *******************************************************************************/
-rc_bb_model_t model;
+
 int rc_initialize(){
 	FILE *fd; 
-    
+    rc_bb_model_t model;
 
 	// ensure root privaleges until we sort out udev rules
 	if(geteuid()!=0){
@@ -123,7 +123,7 @@ int rc_initialize(){
 	if(init_eqep(1)){
 		fprintf(stderr,"WARNING: failed to initialize eQEP1\n");
 	}
-    if (rc_model() != BB_GREEN_W) {
+    if (rc_get_bb_model() != BB_GREEN_W) {
         if (init_eqep(2)) {
             fprintf(stderr, "WARNING: failed to initialize eQEP2\n");
         }
@@ -177,9 +177,7 @@ int rc_initialize(){
 	return 0;
 }
 
-int rc_model() {
-    return model;
-}
+
 
 /*******************************************************************************
 *	int rc_cleanup()
@@ -370,7 +368,7 @@ int rc_get_encoder_pos(int ch){
 	// 4th channel is counted by the PRU not eQEP
     
     if (ch == 4) {
-        if (rc_model() != BB_GREEN_W) {
+        if (rc_get_bb_model() != BB_GREEN_W) {
             return get_pru_encoder_pos();
         }
         else {
@@ -378,7 +376,7 @@ int rc_get_encoder_pos(int ch){
         }
     }
 	// first 3 channels counted by eQEP
-    if (ch == 3 && rc_model() == BB_GREEN_W) {
+    if (ch == 3 && rc_get_bb_model() == BB_GREEN_W) {
         return   0;
     }
     else {
@@ -399,9 +397,9 @@ int rc_set_encoder_pos(int ch, int val){
 		return -1;
 	}
 	// 4th channel is counted by the PRU not eQEP
-	if(ch==4 && rc_model() != BB_GREEN_W) return set_pru_encoder_pos(val);
+	if(ch==4 && rc_get_bb_model() != BB_GREEN_W) return set_pru_encoder_pos(val);
 	// else write to eQEP
-    if (ch == 3 && rc_model() == BB_GREEN_W) {
+    if (ch == 3 && rc_get_bb_model() == BB_GREEN_W) {
         return 0;
     }
     else {

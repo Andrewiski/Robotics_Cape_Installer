@@ -138,7 +138,7 @@ fi
 
 
 
-echo "Using $DTB"
+echo "Using $DTB and $OV"
 
 
 # make backup if not already one
