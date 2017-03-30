@@ -123,10 +123,13 @@ int rc_initialize(){
 	if(init_eqep(1)){
 		fprintf(stderr,"WARNING: failed to initialize eQEP1\n");
 	}
-    if (rc_get_bb_model() != BB_GREEN_W) {
+    if (rc_get_bb_model() != BB_GREEN_W && rc_get_bb_model() != BB_GREEN_W_RC) {
         if (init_eqep(2)) {
             fprintf(stderr, "WARNING: failed to initialize eQEP2\n");
         }
+    }
+    else {
+        fprintf(stderr, "WARNING: eQEP2 not Valid on Beagle Bone Green\n");
     }
 
 	// motors

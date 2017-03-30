@@ -18,7 +18,7 @@ Bit 0 /
 /plugin/; 
 
 / {
-    compatible = "ti,beaglebone-green";
+    compatible = "ti,beaglebone", "ti,beaglebone-green", "ti,beaglebone-black";
 
     /* identification */
     part-number = "RoboticsCapeBBGW";

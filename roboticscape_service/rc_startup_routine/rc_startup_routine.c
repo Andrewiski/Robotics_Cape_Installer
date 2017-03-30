@@ -53,7 +53,7 @@ int main(){
 	
 	// whitelist blue, black, and black wireless only when RC device tree is in use
 	model = rc_get_bb_model();
-	if(model!=BB_BLACK_RC && model!=BB_BLACK_W_RC && model!=BB_BLUE){
+	if(model!=BB_BLACK_RC && model!=BB_BLACK_W_RC && model!=BB_BLUE && model != BB_GREEN_W_RC){
 		if(system("grep -q roboticscape /boot/uEnv.txt")!=0){
 			fprintf(stderr,"roboticscape service can only run on BB Blue, Black, and Black wireless when the roboticscape device tree is in use.\n");
 			return -1;
@@ -173,7 +173,7 @@ int setup_pwm(){
 int check_eqep(){
 	if(access("/sys/devices/platform/ocp/48300000.epwmss/48300180.eqep/enabled", F_OK)) return -1;
 	if(access("/sys/devices/platform/ocp/48302000.epwmss/48302180.eqep/enabled", F_OK)) return -1;
-	if(access("/sys/devices/platform/ocp/48304000.epwmss/48304180.eqep/enabled", F_OK)) return -1;
+	if(rc_get_bb_model() != BB_GREEN_W && rc_get_bb_model() != BB_GREEN_W_RC && access("/sys/devices/platform/ocp/48304000.epwmss/48304180.eqep/enabled", F_OK)) return -1;
 	return 0;
 }
 

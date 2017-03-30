@@ -142,7 +142,8 @@ int init_eqep(int ss){
 		return 0;
 	}
     // ti-eqep 2 is disabled on BBGW
-    if (rc_get_bb_model() == BB_GREEN_W && ss == 2) {
+    if ((rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) && ss == 2) {
+        printf("warning: PWM subsystem 2 skiped on Beagle Bone Green Wireless\n");
         return 0;
     }
 	// check ti-eqep driver is up
@@ -208,7 +209,7 @@ int init_eqep(int ss){
 // read a value from eQEP counter
 int read_eqep(int ch){
     // ti-eqep 2 is disabled on BBGW
-    if (rc_get_bb_model() == BB_GREEN_W && ch == 2) {
+    if ((rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) && ch == 2) {
         return 0;
     }
 	if(init_eqep(ch)) return -1;
@@ -218,7 +219,7 @@ int read_eqep(int ch){
 // write a value to the eQEP counter
 int write_eqep(int ch, int val){
     // ti-eqep 2 is disabled on BBGW
-    if (rc_get_bb_model() == BB_GREEN_W && ch == 2) {
+    if ((rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) && ch == 2) {
         return 0;
     }
 	if(init_eqep(ch)) return -1;

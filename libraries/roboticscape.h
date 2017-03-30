@@ -967,6 +967,7 @@ typedef enum rc_bb_model_t{
 	BB_BLACK_W_RC,
 	BB_GREEN,
 	BB_GREEN_W,
+    BB_GREEN_W_RC,
 	BB_BLUE
 } rc_bb_model_t;
 
