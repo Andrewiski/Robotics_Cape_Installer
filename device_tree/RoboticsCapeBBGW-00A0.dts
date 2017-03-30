@@ -30,11 +30,11 @@ Bit 0 /
 		"P8.7",		/*LED_RED*/
 		"P8.8",		/*LED_GRN*/
 		"P8.9",		/*PAUSE_BTN*/
-		/* "P8.10",	BBGW Wifi Conflict */ /*MODE_BTN*/
+	    "P8.10",    /*MODE_BTN*/
 		/* "P8.11", BBGW Wifi Conflict */	/*QEP_2B*/
 		/* "P8.12", BBGW Wifi Conflict */	/*QEP_2A*/
 		"P8.13",	/*PWM_2B*/
-		"P8.14",	/*BATT_LED_4*/
+		/* "P8.14", BBGW Wifi Conflict */	/*BATT_LED_4*/
 		/* "P8.15", BBGW Wifi Conflict */	/*PRU_ENCODER_B*/
 		/* "P8.16", BBGW Wifi Conflict */	/*PRU_ENCODER_A*/
 		/* "P8.17", BBGW Wifi Conflict */	/*BATT_LED_1*/
@@ -155,13 +155,13 @@ fragment@0 {
 			
 			/* GPIO Inputs */
 			0x09c 0x37	/*P8.9  Pause BUTTON, input pullup*/
-			/* 0x098 0x37 */	/*P8.10 MODE BUTTON input pullup*/
+			0x098 0x37 	/*P8.10 MODE BUTTON input pullup*/
 			0x1AC 0x37	/*P9.25 MPU-9150 INTERRUPT IN*/
 			
 			/* GPIO Outputs
 			0x090 0x0F	/*P8.7, MODE7*/
 			0x094 0x0F	/*P8.8*/
-			0x028 0x0F	/*P8.14*/
+			/* 0x028 0x0F BBGW Wifi Conflict */	/*P8.14*/
 			/* 0x02C 0x0F BBGW Wifi Conflict */	/*P8.17*/
 			/* 0x08c 0x0F BBGW Wifi Conflict */	/*P8.18*/
 			0x07c 0x0F	/*P8.26*/
