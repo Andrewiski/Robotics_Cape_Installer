@@ -39,7 +39,7 @@ Bit 0 /
 		/* "P8.16", BBGW Wifi Conflict */	/*PRU_ENCODER_A*/
 		/* "P8.17", BBGW Wifi Conflict */	/*BATT_LED_1*/
 		"P8.19",	/*PWM_2A*/
-		"P8.26", 	/*BATT_LED_3*/
+		/* "P8.26", BBGW Wifi Conflict */	/*BATT_LED_3*/
 		"P8.27",	/*SERVO_1*/
 		"P8.28",	/*SERVO_2*/
 		"P8.29",	/*SERVO_3*/
@@ -164,7 +164,7 @@ fragment@0 {
 			/* 0x028 0x0F BBGW Wifi Conflict */	/*P8.14*/
 			/* 0x02C 0x0F BBGW Wifi Conflict */	/*P8.17*/
 			/* 0x08c 0x0F BBGW Wifi Conflict */	/*P8.18*/
-			0x07c 0x0F	/*P8.26*/
+			/*0x07c 0x0F BBGW Wifi Conflict */	/*P8.26*/
 			0x0cc 0x0F	/*P8.34*/
 			0x0C8 0x0F	/*P8.36*/
 			0x0a8 0x0F	/*P8.43*/
