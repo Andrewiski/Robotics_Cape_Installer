@@ -27,7 +27,7 @@ Bit 0 /
     version = "00A0";
 	
 	exclusive-use =
-		/* "P8.7", BBGW Wifi Conflict */		/*LED_RED*/
+		"P8.7",		/*LED_RED*/
 		"P8.8",		/*LED_GRN*/
 		"P8.9",		/*PAUSE_BTN*/
 		/* "P8.10",	BBGW Wifi Conflict */ /*MODE_BTN*/
