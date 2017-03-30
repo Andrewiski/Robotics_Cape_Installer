@@ -30,7 +30,7 @@ Bit 0 /
 		"P8.7",		/*LED_RED*/
 		"P8.8",		/*LED_GRN*/
 		"P8.9",		/*PAUSE_BTN*/
-		"P8.10",	/*MODE_BTN*/
+		/* "P8.10",	BBGW Wifi Conflict */ /*MODE_BTN*/
 		/* "P8.11", BBGW Wifi Conflict */	/*QEP_2B*/
 		/* "P8.12", BBGW Wifi Conflict */	/*QEP_2A*/
 		"P8.13",	/*PWM_2B*/
