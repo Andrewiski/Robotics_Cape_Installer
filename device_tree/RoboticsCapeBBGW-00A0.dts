@@ -155,7 +155,7 @@ fragment@0 {
 			
 			/* GPIO Inputs */
 			0x09c 0x37	/*P8.9  Pause BUTTON, input pullup*/
-			0x098 0x37	/*P8.10 MODE BUTTON input pullup*/
+			/* 0x098 0x37 */	/*P8.10 MODE BUTTON input pullup*/
 			0x1AC 0x37	/*P9.25 MPU-9150 INTERRUPT IN*/
 			
 			/* GPIO Outputs
