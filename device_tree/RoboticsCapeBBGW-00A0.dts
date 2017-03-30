@@ -104,7 +104,7 @@ Bit 0 /
 		"pru1",
 		"i2c1",
 		"i2c2",
-		"uart1",	/*breakout*/
+		/* "uart1", */	/*breakout*/
 		/* "uart2", */	/*GPS*/
 		"uart4",	/*DSM2*/
 		"uart5", 	/*breakout*/
@@ -189,8 +189,8 @@ fragment@0 {
 			0x19c 0x0F	/*spi1_cs0,OUTPUT_PULLUP,MODE7 */
 			
 			/* UART1 */
-			0x184 0x10 /*P9.24,uart1_txd,MODE0,OUTPUT*/
-			0x180 0x30 /*P9.26,uart1_rxd,MODE0,INPUT*/
+			/* 0x184 0x10 */ /*P9.24,uart1_txd,MODE0,OUTPUT*/
+			/* 0x180 0x30 * / /*P9.26,uart1_rxd,MODE0,INPUT*/
 			
 			/* UART2 */
 			/* 0x150 0x21 */	/*P9.22,uart2_rxd,MODE1 */
