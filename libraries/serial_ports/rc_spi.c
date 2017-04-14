@@ -45,6 +45,10 @@ int rc_spi_init(ss_mode_t ss_mode, int spi_mode, int speed_hz, int slave){
 																SPI_MAX_SPEED);
 		return -1;
 	}
+    if (rc_get_bb_model() != BB_GREEN_W  || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("ERROR: Can't use SPI on BBGW\n");
+        return -1;
+    }
 	if(rc_get_bb_model()!=BB_BLUE && slave==2 && ss_mode==SS_MODE_AUTO){
 		printf("ERROR: Can't use SS_MODE_AUTO on slave 2 with Cape\n");
 		return -1;
@@ -155,6 +159,10 @@ int rc_spi_init(ss_mode_t ss_mode, int spi_mode, int speed_hz, int slave){
 * return -1
 *******************************************************************************/
 int rc_spi_fd(int slave){
+    if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("ERROR: Can't use SPI on BBGW\n");
+        return -1;
+    }
 	switch(slave){
 	case 1:
 		if(initialized[0]==0){
@@ -179,6 +187,10 @@ int rc_spi_fd(int slave){
 * Closes the file descriptor and sets initialized to 0.
 *******************************************************************************/
 int rc_spi_close(int slave){
+    if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("ERROR: Can't use SPI on BBGW\n");
+        return -1;
+    }
 	switch(slave){
 	case 1:
 		rc_manual_deselect_spi_slave(slave);
@@ -202,6 +214,10 @@ int rc_spi_close(int slave){
 * to ground. It also ensures the other slave is not selected.
 *******************************************************************************/
 int rc_manual_select_spi_slave(int slave){
+    if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("ERROR: Can't use SPI on BBGW\n");
+        return -1;
+    }
 	switch(slave){
 		case 1:
 			rc_gpio_set_value_mmap(gpio_ss[0], LOW);
@@ -225,6 +241,10 @@ int rc_manual_select_spi_slave(int slave){
 * to 3.3V.
 *******************************************************************************/
 int rc_manual_deselect_spi_slave(int slave){
+    if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("ERROR: Can't use SPI on BBGW\n");
+        return -1;
+    }
 	switch(slave){
 		case 1:
 			rc_gpio_set_value_mmap(gpio_ss[0], HIGH);

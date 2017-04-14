@@ -57,7 +57,12 @@ int rc_enable_motors(){
 		return -1;
 	}
 	rc_set_motor_free_spin_all();
-	return rc_gpio_set_value_mmap(MOT_STBY, HIGH);
+    if (rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) {
+        return 0;
+    }
+    else {
+        return rc_gpio_set_value_mmap(MOT_STBY, HIGH);
+    }
 }
 
 /*******************************************************************************
@@ -71,7 +76,9 @@ int rc_disable_motors(){
 		printf("ERROR: trying to disable motors before they have been initialized\n");
 		return -1;
 	}
-	rc_gpio_set_value_mmap(MOT_STBY, LOW);
+    if (rc_get_bb_model() != BB_GREEN_W && rc_get_bb_model() != BB_GREEN_W_RC) {
+        rc_gpio_set_value_mmap(MOT_STBY, LOW);
+    }
 	rc_set_motor_free_spin_all();
 	return 0;
 }

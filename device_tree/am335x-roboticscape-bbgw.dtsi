@@ -25,10 +25,10 @@
 			/* LEDs GPIO Out*/
 			0x090 0x0F	/* P8.7 R7 LED_RED */
 			0x094 0x0F	/* P8.8 T7 LED_GREEN */
-			0x028 0x0F	/*P8.14 T11 BATT_LED_4 */
+			/* 0x028 0x0F BBGW Wifi Conflict */	/*P8.14 T11 BATT_LED_4 */
 			/* 0x02C 0x0F BBGW Wifi Conflict */	 /*P8.17 U12 BATT_LED_1 */
 			/* 0x08c 0x0F  BBGW Wifi Conflict */	/*P8.18 V12 BATT_LED_2 */
-			0x07c 0x0F	/*P8.26 V6  BATT_LED_3 */
+			/* 0x07c 0x0F BBGW Wifi Conflict */	/*P8.26 V6  BATT_LED_3 */
 
 			/* Motor Control GPIO Out*/
 			0x0cc 0x0F	/*P8.34 MDIR_2B different from blue!!*/
@@ -36,10 +36,10 @@
 			0x0ac 0x0F	/*P8.44 MDIR_3A*/
 			0x0a0 0x0F	/*P8.45 MDIR_4A*/
 			0x0a4 0x0F	/*P8.46 MDIR_4B*/
-			0x078 0x0F	/*P9.12 MDIR_1A different from blue!!*/
+			/* 0x078 0x0F BBGW Wifi Conflict */	/*P9.12 MDIR_1A different from blue!!*/
 			0x074 0x0F	/*P9.13 MDIR_1B*/
 			0x040 0x0F	/*P9.15 MDIR_2A*/
-			0x1b4 0x0F	/*P9.41 MOT_STBY*/
+			/* 0x1b4 0x0F BBGW Wifi Conflict */	/*P9.41 MOT_STBY*/
 
 			/* HRPWM 1 */
 			0x048  0x6 /* P9_14 | MODE 6 */
@@ -147,6 +147,7 @@
     };
 
     /* SPI MISO */
+    /*
     P9_29_pinmux {
         compatible = "bone-pinmux-helper";
         status = "okay";
@@ -160,8 +161,10 @@
         pinctrl-6 = <&P9_29_pruout_pin>;
         pinctrl-7 = <&P9_29_pruin_pin>;
     };
+    BBGW Wifi Conflict */
 
     /* SPI MOSI */
+    /*
     P9_30_pinmux {
         compatible = "bone-pinmux-helper";
         status = "okay";
@@ -175,8 +178,10 @@
         pinctrl-6 = <&P9_30_pruout_pin>;
         pinctrl-7 = <&P9_30_pruin_pin>;
     };
+    BBGW Wifi Conflict */
 
     /* SPI SCK */
+    /*
     P9_31_pinmux {
         compatible = "bone-pinmux-helper";
         status = "okay";
@@ -190,8 +195,9 @@
         pinctrl-6 = <&P9_31_pruout_pin>;
         pinctrl-7 = <&P9_31_pruin_pin>;
     };
-
+    BBGW Wifi Conflict */
     /* SPI SS1 GPIO3_17*/
+    /*
 	P9_28_pinmux {
         compatible = "bone-pinmux-helper";
         status = "okay";
@@ -206,7 +212,7 @@
         pinctrl-7 = <&P9_28_pruout_pin>;
         pinctrl-8 = <&P9_28_pruin_pin>;
     };
-
+    BBGW Wifi Conflict */
     /* SPI SS1  GPIO1_17*/
     P9_23_pinmux {
         compatible = "bone-pinmux-helper";
@@ -356,6 +362,7 @@
 /*******************************************************************************
 * SPI
 *******************************************************************************/
+/*
 &spi1 {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -382,3 +389,4 @@
 		spi-max-frequency = <16000000>;
 	};
 };
+BBGW Wifi Conflict */

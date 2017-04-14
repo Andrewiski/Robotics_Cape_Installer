@@ -40,7 +40,6 @@ void shutdown_signal_handler(int signo);
 // gpio designation for led 2 is a global variable
 // the rest are #defines but since led 2 is different on the blue
 // we must make it variable
-int batt_led_1;  //remapped on BBGW so WIFI works
 int batt_led_2;
 int running;
 
@@ -118,29 +117,20 @@ int main(int argc, char *argv[]){
 
 	// set led 2 gpio designation depending on board
     if (rc_get_bb_model() == BB_BLUE) {
-        batt_led_1 = BATT_LED_1;
         batt_led_2 = BATT_LED_2_BLUE;
-    }else if (model == BB_GREEN_W) {
-        batt_led_1 = BATT_LED_1_BBGW;
-        batt_led_2 = BATT_LED_2_BBGW;
-    }
-    else {
-        batt_led_1 = BATT_LED_1;
+    }else {
         batt_led_2 = BATT_LED_2;
-
     }
 
 	// open the gpio channels for 4 battery indicator LEDs
     
-    rc_gpio_export(batt_led_1);
+    rc_gpio_export(BATT_LED_1);
     rc_gpio_export(batt_led_2);
     
 	rc_gpio_export(BATT_LED_3);
 	rc_gpio_export(BATT_LED_4);
-    if (model != BB_GREEN_W && model != BB_GREEN_W_RC) {
-        rc_gpio_set_dir(batt_led_1, OUTPUT_PIN);
-        rc_gpio_set_dir(batt_led_2, OUTPUT_PIN);
-    }
+    rc_gpio_set_dir(BATT_LED_1, OUTPUT_PIN);
+    rc_gpio_set_dir(batt_led_2, OUTPUT_PIN);
 	rc_gpio_set_dir(BATT_LED_3, OUTPUT_PIN);
 	rc_gpio_set_dir(BATT_LED_4, OUTPUT_PIN);
 	
@@ -345,31 +335,31 @@ void illuminate_leds(int i){
 	switch(i){
 	// now illuminate LEDs properly
 	case 4:
-		rc_gpio_set_value_mmap(batt_led_1,HIGH);
+		rc_gpio_set_value_mmap(BATT_LED_1,HIGH);
 		rc_gpio_set_value_mmap(batt_led_2,HIGH);
 		rc_gpio_set_value_mmap(BATT_LED_3,HIGH);
 		rc_gpio_set_value_mmap(BATT_LED_4,HIGH);
 		break;
 	case 3:
-		rc_gpio_set_value_mmap(batt_led_1,HIGH);
+		rc_gpio_set_value_mmap(BATT_LED_1,HIGH);
 		rc_gpio_set_value_mmap(batt_led_2,HIGH);
 		rc_gpio_set_value_mmap(BATT_LED_3,HIGH);
 		rc_gpio_set_value_mmap(BATT_LED_4,LOW);
 		break;
 	case 2:
-		rc_gpio_set_value_mmap(batt_led_1,HIGH);
+		rc_gpio_set_value_mmap(BATT_LED_1,HIGH);
 		rc_gpio_set_value_mmap(batt_led_2,HIGH);
 		rc_gpio_set_value_mmap(BATT_LED_3,LOW);
 		rc_gpio_set_value_mmap(BATT_LED_4,LOW);
 		break;
 	case 1:
-		rc_gpio_set_value_mmap(batt_led_1,HIGH);
+		rc_gpio_set_value_mmap(BATT_LED_1,HIGH);
 		rc_gpio_set_value_mmap(batt_led_2,LOW);
 		rc_gpio_set_value_mmap(BATT_LED_3,LOW);
 		rc_gpio_set_value_mmap(BATT_LED_4,LOW);
 		break;
 	case 0:
-		rc_gpio_set_value_mmap(batt_led_1,LOW);
+		rc_gpio_set_value_mmap(BATT_LED_1,LOW);
 		rc_gpio_set_value_mmap(batt_led_2,LOW);
 		rc_gpio_set_value_mmap(BATT_LED_3,LOW);
 		rc_gpio_set_value_mmap(BATT_LED_4,LOW);

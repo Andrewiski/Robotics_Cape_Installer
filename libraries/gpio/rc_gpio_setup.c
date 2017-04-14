@@ -58,7 +58,11 @@ int configure_gpio_pins(){
 		// ret |= setup_input_pin(BLUE_GP0_PIN_6);
 		// ret |= setup_input_pin(BLUE_GP1_PIN_3);
 		// ret |= setup_input_pin(BLUE_GP1_PIN_4);
-	}
+    }
+    else if (rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) {
+        mdir1a = MDIR1A_BBGW;
+        mdir2b = MDIR2B;
+    }
 	// Cape-Only stuff
 	else{
 		mdir1a = MDIR1A;
@@ -99,8 +103,9 @@ int configure_gpio_pins(){
 	ret |= setup_output_pin(MDIR3B, LOW);
 	ret |= setup_output_pin(MDIR4A, LOW);
 	ret |= setup_output_pin(MDIR4B, LOW);
-	ret |= setup_output_pin(MOT_STBY, LOW);
-	
+    if (rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) {
+        ret |= setup_output_pin(MOT_STBY, LOW);
+    }
 	// DSM
 	ret |= setup_output_pin(DSM_PIN, LOW);
 	

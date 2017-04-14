@@ -44,10 +44,11 @@
 	bus-width = <8>;
 	status = "okay";
 };
-
+/*
 &uart3 {
 	status = "okay";
 };
+BBGW Wifi Conflict */
 
 &mmc3 {
 	status = "okay";

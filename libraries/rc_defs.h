@@ -50,6 +50,7 @@
 #define GRN_LED 	67	//gpio2.3	P8.8
 #define MDIR1A    	60	//gpio1.28  P9.12
 #define MDIR1A_BLUE 64  //gpio2.0 pin T13
+#define MDIR1A_BBGW 10  //gpio0.10  P8_31
 #define MDIR1B    	31	//gpio0.31	P9.13
 #define MDIR2A    	48	//gpio1.16  P9.15
 #define MDIR2B    	81	//gpio2.17  P8.34
@@ -73,8 +74,6 @@
 #define BATT_LED_2_BLUE 11 // different on BB Blue
 #define BATT_LED_3	61 // P8.26
 #define BATT_LED_4	26 // P8.14
-#define BATT_LED_1_BBGW 66 // Avoid BBGW Wifi reuse RED_LED For Now
-#define BATT_LED_2_BBGW 67 // Avoid BBGW Wifi reuse Green_LED for Now
 
 #define DC_JACK_OFFSET -0.15
 #define LIPO_OFFSET -0.10

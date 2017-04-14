@@ -213,8 +213,10 @@ int rc_cleanup(){
 	#ifdef DEBUG
 	printf("Turning off SPI slaves\n");
 	#endif
-	rc_manual_deselect_spi_slave(1);
-	rc_manual_deselect_spi_slave(2);
+    if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        rc_manual_deselect_spi_slave(1);
+        rc_manual_deselect_spi_slave(2);
+    }
 
 	#ifdef DEBUG
 	printf("Turning off servo power rail\n");
