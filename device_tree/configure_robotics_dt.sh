@@ -103,7 +103,7 @@ elif   [ "$MODEL" == "TI AM335x BeagleBone Black" ]; then
 		echo "no changes made to uEnv.txt"
 	fi
 # test for BBGW
-elif   [ "$MODEL" == "TI AM335x BeagleBone Green Wireless" || "$MODEL" == "TI AM335x BeagleBone Green Wireless RoboticsCape" ]; then
+elif   ([ "$MODEL" == "TI AM335x BeagleBone Green Wireless"]  || ["$MODEL" == "TI AM335x BeagleBone Green Wireless RoboticsCape"]); then
 
 	# if the roboticscape tree is available, use that
 	if [ -a "/boot/dtbs/$UNAME/$TREE_BBGW_RC" ]; then
