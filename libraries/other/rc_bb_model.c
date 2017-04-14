@@ -100,7 +100,7 @@ void rc_print_bb_model(){
 		printf("BB_GREEN_W");
 		break;
     case(BB_GREEN_W_RC):
-        printF("BB_GREEN_W_RC");
+        printf("BB_GREEN_W_RC");
         break;
 	case(BB_BLUE):
 		printf("BB_BLUE");
