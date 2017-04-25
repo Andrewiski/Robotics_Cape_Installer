@@ -22,6 +22,10 @@ int initialize_motors(){
 		mdir1a = MDIR1A_BLUE;
 		mdir2b = MDIR2B_BLUE;
 	}
+    else if (rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) {
+        mdir1a = MDIR1A_BBGW;
+        mdir2b = MDIR2B;
+    }
 	else{
 		mdir1a = MDIR1A;
 		mdir2b = MDIR2B;

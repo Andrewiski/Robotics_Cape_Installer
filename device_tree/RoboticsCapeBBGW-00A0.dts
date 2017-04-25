@@ -108,7 +108,7 @@ Bit 0 /
 		/* "uart2", */	/*GPS*/
 		"uart4",	/*DSM2*/
 		"uart5", 	/*breakout*/
-		"spi1",
+		/* "spi1", */
 		"tscadc";
 	
 		
