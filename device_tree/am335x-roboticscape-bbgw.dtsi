@@ -77,9 +77,11 @@
 			0x158 0x32	/* P9.18,i2c1_sda,INPUT_PULLUP,MODE2 */
 
 			/* I2C2 */
+			/*
 			0x17c  0x73 /* P9.19, i2c2_sda, mode 3 */
 			0x178  0x73 /* P9.20, i2c2_sda, mode 3 */
-
+			/*
+			
 			/* UART5 */
 			0x0C4 0x34	/* P8.38,uart5_rxd,MODE4 */
 			0x0C0 0x14	/* P8.37,uart5_txd,MODE4 */
@@ -351,14 +353,14 @@
 	#address-cells = <1>;
 	#size-cells = <0>;
 };
-
+/*
 &i2c2 {	    
 	status = "okay";
 	clock-frequency = <400000>;
 	#address-cells = <1>;
 	#size-cells = <0>;
 };
-
+*/
 
 /*******************************************************************************
 * SPI
