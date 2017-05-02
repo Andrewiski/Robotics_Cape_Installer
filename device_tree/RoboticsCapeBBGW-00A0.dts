@@ -65,8 +65,8 @@ Bit 0 /
 		"P9.14",	/*PWM_1A*/
 		"P9.15",	/*MDIR_2A*/
 		"P9.16",	/*PWM_1B*/
-		"P9.17",	/*I2C1_SCL*/
-		"P9.18",	/*I2C1_SDA*/
+		/*"P9.17",*/	/*I2C1_SCL*/
+		/*"P9.18", */	/*I2C1_SDA*/
 		/* "P9.19", */	/*I2C2_SCL*/
 		/* "P9.20", */	/*I2C2_SDA*/
 		"P9.21",	/*UART2_TX*/
@@ -102,7 +102,7 @@ Bit 0 /
 		"pruss",
 		"pru0",
 		"pru1",
-		"i2c1",
+		/* "i2c1", */
 		/* "i2c2", */
 		"uart1", 	/*breakout*/
 		"uart2", 	/*GPS*/
@@ -179,8 +179,8 @@ fragment@0 {
 			/* 0x1b4 0x0F BBGW Wifi Conflict */	/*P9.41*/
 			
 			/* I2C1 */
-			0x15C 0x32	/* P9.17,i2c1_scl,INPUT_PULLUP,MODE2 */
-			0x158 0x32	/* P9.18,i2c1_sda,INPUT_PULLUP,MODE2 */
+			/* 0x15C 0x32 */	/* P9.17,i2c1_scl,INPUT_PULLUP,MODE2 */
+			/* 0x158 0x32 */	/* P9.18,i2c1_sda,INPUT_PULLUP,MODE2 */
 			
 			/* SPI1 */
 			/* 0x190 0x33 BBGW Wifi Conflict */	/*spi1_sclk,INPUT_PULLUP,MODE3 */
@@ -383,21 +383,22 @@ fragment@31 {
 /****************************************
  		I2C			
 ****************************************/	
+/*
 fragment@32 {
-	target = <&i2c1>;	/* i2c1 is numbered correctly */
+	target = <&i2c1>;	
 	__overlay__ {
 		status = "okay";
 
-		/* this is the configuration part */
+		
 		clock-frequency = <400000>;
 
 		#address-cells = <1>;
 		#size-cells = <0>;
 
-		/* add any i2c devices on the bus here */
+		
 	};
 };
-
+*/
 /****************************************
  		SPI			
 ****************************************/	
