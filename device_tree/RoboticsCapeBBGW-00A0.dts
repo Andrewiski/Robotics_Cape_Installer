@@ -69,8 +69,8 @@ Bit 0 /
 		"P9.18",	/*I2C1_SDA*/
 		"P9.19",	/*I2C2_SCL*/
 		"P9.20",	/*I2C2_SDA*/
-		/* "P9.21", */	/*UART2_TX*/
-		/* "P9.22", */	/*UART2_RX*/
+		"P9.21",	/*UART2_TX*/
+		"P9.22",	/*UART2_RX*/
 		"P9.23", 	/*SPI1_SS2*/
 		"P9.24",	/*UART1_TX*/
 		"P9.25",	/*IMU_INT*/
@@ -104,8 +104,8 @@ Bit 0 /
 		"pru1",
 		"i2c1",
 		"i2c2",
-		/* "uart1", */	/*breakout*/
-		/* "uart2", */	/*GPS*/
+		"uart1", 	/*breakout*/
+		"uart2", 	/*GPS*/
 		"uart4",	/*DSM2*/
 		"uart5", 	/*breakout*/
 		/* "spi1", */
@@ -318,14 +318,14 @@ fragment@23 {
 	};
 };
 
-/*
+
 fragment@24 {
 	target = <&uart2>;
 	__overlay__ {
 		status = "okay";
 	};
 };
-*/
+
 /*
 fragment@25 {
 	target = <&uart3>;
