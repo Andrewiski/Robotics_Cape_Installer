@@ -213,8 +213,8 @@
         pinctrl-8 = <&P9_28_pruin_pin>;
     };
     BBGW Wifi Conflict */
-    /* SPI SS1  GPIO1_17 */
-    /* 
+    /* SPI SS2  GPIO1_17 */
+     
     P9_23_pinmux {
         compatible = "bone-pinmux-helper";
         status = "okay";
@@ -225,7 +225,7 @@
         pinctrl-3 = <&P9_23_gpio_pd_pin>;
         pinctrl-4 = <&P9_23_pwm_pin>;
     };
-    */
+    
     /* UART 1 TX */
      P9_24_pinmux {
         compatible = "bone-pinmux-helper";
@@ -270,11 +270,11 @@
 &epwmss1 {
 	status = "okay";
 };
-/*
+
 &epwmss2 {
 	status = "okay";
 };
-*/
+
 &ehrpwm0 {
 	status = "okay";
 };
