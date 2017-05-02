@@ -361,12 +361,19 @@ int rc_set_default_pinmux(){
 		ret |= rc_set_pinmux_mode(BLUE_GP0_PIN_6, PINMUX_GPIO_PU);
 		ret |= rc_set_pinmux_mode(BLUE_GP1_PIN_3, PINMUX_GPIO_PU);
 		ret |= rc_set_pinmux_mode(BLUE_GP1_PIN_4, PINMUX_GPIO_PU);
-
-	}
-
-	// bb black and everything else
-	else{
+        ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_3, PINMUX_SPI);
+	    ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_4, PINMUX_SPI);
+	    ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_5, PINMUX_SPI);
+	}else if(rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC ){
+		// NO SPI on BBG else wifi module crashes as pin conflict
+		ret |= rc_set_pinmux_mode(CAPE_SPI_PIN_6_SS2, PINMUX_GPIO);
+		
+		// bb black and everything else
+	}else{
 		ret |= rc_set_pinmux_mode(CAPE_SPI_PIN_6_SS1, PINMUX_SPI);
+		ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_3, PINMUX_SPI);
+	    ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_4, PINMUX_SPI);
+	    ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_5, PINMUX_SPI);
 		ret |= rc_set_pinmux_mode(CAPE_SPI_PIN_6_SS2, PINMUX_GPIO);
 	}
 
@@ -376,9 +383,7 @@ int rc_set_default_pinmux(){
 	ret |= rc_set_pinmux_mode(GPS_HEADER_PIN_4, PINMUX_UART);
 	ret |= rc_set_pinmux_mode(UART1_HEADER_PIN_3, PINMUX_UART);
 	ret |= rc_set_pinmux_mode(UART1_HEADER_PIN_4, PINMUX_UART);
-	ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_3, PINMUX_SPI);
-	ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_4, PINMUX_SPI);
-	ret |= rc_set_pinmux_mode(SPI_HEADER_PIN_5, PINMUX_SPI);
+	
 
 
 	if(ret){
