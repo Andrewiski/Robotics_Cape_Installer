@@ -103,7 +103,7 @@ Bit 0 /
 		"pru0",
 		"pru1",
 		"i2c1",
-		"i2c2",
+		/* "i2c2", */
 		"uart1", 	/*breakout*/
 		"uart2", 	/*GPS*/
 		"uart4",	/*DSM2*/
