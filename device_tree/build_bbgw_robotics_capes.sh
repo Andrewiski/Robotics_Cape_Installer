@@ -29,13 +29,13 @@ fi
 
 
 echo "Building Beagle Bone Green Wireless Robotics Cape Device Tree"
-cp -u device_tree/am335x-roboticscape-bbgw.dtsi /opt/source/dtb-4.4-ti/src/arm/am335x-roboticscape-bbgw.dtsi
-cp -u device_tree/am335x-bonegreen-wireless-roboticscape.dts /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dts
+cp device_tree/am335x-roboticscape-bbgw.dtsi /opt/source/dtb-4.4-ti/src/arm/am335x-roboticscape-bbgw.dtsi
+cp device_tree/am335x-bonegreen-wireless-roboticscape.dts /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dts
 make -C /opt/source/dtb-4.4-ti src/arm/am335x-bonegreen-wireless-roboticscape.dtb
-cp -u /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dtb "/boot/dtbs/$UNAME/am335x-bonegreen-wireless-roboticscape.dtb" 
+cp /opt/source/dtb-4.4-ti/src/arm/am335x-bonegreen-wireless-roboticscape.dtb "/boot/dtbs/$UNAME/am335x-bonegreen-wireless-roboticscape.dtb" 
 
-cp -u device_tree/RoboticsCapeBBGW-00A0.dts /opt/source/bb.org-overlays/src/arm/RoboticsCapeBBGW-00A0.dts
+cp device_tree/RoboticsCapeBBGW-00A0.dts /opt/source/bb.org-overlays/src/arm/RoboticsCapeBBGW-00A0.dts
 make -C /opt/source/bb.org-overlays src/arm/RoboticsCapeBBGW-00A0.dtbo
-cp -u /opt/source/bb.org-overlays/src/arm/RoboticsCapeBBGW-00A0.dtbo "/lib/firmware/RoboticsCapeBBGW-00A0.dtbo"    
+cp /opt/source/bb.org-overlays/src/arm/RoboticsCapeBBGW-00A0.dtbo "/lib/firmware/RoboticsCapeBBGW-00A0.dtbo"    
 echo "Finished Building Beagle Bone Green Wireless Robotics Cape Device Tree"
 exit 0
