@@ -171,7 +171,7 @@ echo dtb=$DTB >> $UENV
 echo cmdline=coherent_pool=1M >> $UENV
 
 # if not using custom device tree, load the overlay
-if [ "$DTB" != "$TREE_BLACK_RC" ] && [ "$DTB" != "$TREE_BW_RC" ]; then
+if [ "$DTB" != "$TREE_BLACK_RC" ] && [ "$DTB" != "$TREE_BW_RC" ]  && [ "$DTB" != "$TREE_BBGW_RC" ]; then
 	echo cape_enable=bone_capemgr.enable_partno=$OV >> $UENV
 	# modify default cape to load in case missing from initramfs
 	echo CAPE=$OV > /etc/default/capemgr
