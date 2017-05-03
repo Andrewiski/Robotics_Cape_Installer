@@ -9,10 +9,12 @@ BIN_DIR := bin
 
 PRU1_FW		=$(BIN_DIR)/main-pru1-fw.out
 PRU0_FW		=$(BIN_DIR)/main-pru0-fw.out
+PRU0_GW_FW	=$(BIN_DIR)/main-pru0-bbgw-fw.out
 
-TARGETS		=$(PRU1_FW) $(PRU0_FW)
+TARGETS		=$(PRU1_FW) $(PRU0_FW) $(PRU0_GW_FW)
 LINK_PRU1_FW=$(BIN_DIR)/pru1-servo.object
 LINK_PRU0_FW=$(BIN_DIR)/pru0-encoder.object
+LINK_PRU0_BBGW_FW=$(BIN_DIR)/pru0-bbgw-encoder.object
 
 RM := rm -f -r 
 INSTALL := install -m 755 
@@ -56,6 +58,10 @@ all: $(TARGETS)
 $(PRU0_FW): $(BIN_DIR)/main_pru0.object $(LINK_PRU0_FW)
 	@echo 'LD	$^' 
 	@$(LNKPRU) -i$(PRU_CGT)/lib -i$(PRU_CGT)/include $(LFLAGS) -o $@ $^  $(LINKER_COMMAND_FILE) --library=libc.a $(LIBS) $^
+	
+$(PRU0_GW_FW): $(BIN_DIR)/main_pru0_bbgw.object $(LINK_PRU0_BBGW_FW)
+	@echo 'LD	$^' 
+	@$(LNKPRU) -i$(PRU_CGT)/lib -i$(PRU_CGT)/include $(LFLAGS) -o $@ $^  $(LINKER_COMMAND_FILE) --library=libc.a $(LIBS) $^
 
 $(PRU1_FW): $(BIN_DIR)/main_pru1.object $(LINK_PRU1_FW)
 	@echo 'LD	$^'
@@ -63,6 +69,11 @@ $(PRU1_FW): $(BIN_DIR)/main_pru1.object $(LINK_PRU1_FW)
 
 
 $(BIN_DIR)/main_pru0.object: main_pru0.c 
+	@mkdir -p $(BIN_DIR)
+	@echo 'CC	$<'
+	@$(CLPRU)  $(INCLUDE) $(CFLAGS) -fe $@ $<
+
+$(BIN_DIR)/main_pru0_bbgw.object: main_pru0.c 
 	@mkdir -p $(BIN_DIR)
 	@echo 'CC	$<'
 	@$(CLPRU)  $(INCLUDE) $(CFLAGS) -fe $@ $<
@@ -84,13 +95,17 @@ $(BIN_DIR)/pru0-encoder.object: pru0-encoder.asm
 	@echo 'CC	$<'
 	@$(CLPRU) $(INCLUDE) $(CFLAGS) -fe $@ $<
 
-
+$(BIN_DIR)/pru0-bbgw-encoder.object: pru0-encoder-bbgw.asm
+	@mkdir -p $(BIN_DIR)
+	@echo 'CC	$<'
+	@$(CLPRU) $(INCLUDE) $(CFLAGS) -fe $@ $<
 
 install:
 	$(MAKE)
 	@$(INSTALLDIR) $(DESTDIR)/lib/firmware
 	@$(INSTALLDIR) $(DESTDIR)/etc/modprobe.d
 	@$(INSTALLNONEXEC) $(PRU0_FW) $(DESTDIR)/lib/firmware/am335x-pru0-fw
+	@$(INSTALLNONEXEC) $(PRU0_GW_FW) $(DESTDIR)/lib/firmware/am335x-pru0-fw-bbgw
 	@$(INSTALLNONEXEC) $(PRU1_FW) $(DESTDIR)/lib/firmware/am335x-pru1-fw
 	@$(INSTALLNONEXEC) pruss-blacklist.conf $(DESTDIR)/etc/modprobe.d/
 	@echo 'PRU Firmware Install Complete'
@@ -98,11 +113,12 @@ install:
 
 clean:
 	@$(RM) $(BIN_DIR)
-	@$(RM) main_pru1.asm main_pru0.asm file.map
+	@$(RM) main_pru1.asm main_pru0.asm main_pru0_bbgw.asm file.map
 	@echo 'PRU Firmware Cleanup Complete'
 
 uninstall:
 	@$(RM) /lib/firmware/am335x-pru0-fw
 	@$(RM) /lib/firmware/am335x-pru1-fw
+	@$(RM) /lib/firmware/am335x-pru0-fw-bbgw
 	@$(RM) /etc/modprobe.d/pruss-blacklist.conf
 	@echo "PRU Firmware Uninstall Complete"
