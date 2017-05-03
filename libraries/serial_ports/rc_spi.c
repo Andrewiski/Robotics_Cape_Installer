@@ -47,7 +47,7 @@ int rc_spi_init(ss_mode_t ss_mode, int spi_mode, int speed_hz, int slave){
 	}
     if (rc_get_bb_model() != BB_GREEN_W  || rc_get_bb_model() != BB_GREEN_W_RC) {
         printf("Warning: Can't use SPI on BBGW\n");
-        return -1;
+        return 0;
     }
 	if(rc_get_bb_model()!=BB_BLUE && slave==2 && ss_mode==SS_MODE_AUTO){
 		printf("ERROR: Can't use SS_MODE_AUTO on slave 2 with Cape\n");
@@ -160,8 +160,8 @@ int rc_spi_init(ss_mode_t ss_mode, int spi_mode, int speed_hz, int slave){
 *******************************************************************************/
 int rc_spi_fd(int slave){
     if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
-        printf("ERROR: Can't use SPI on BBGW\n");
-        return -1;
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
     }
 	switch(slave){
 	case 1:
@@ -188,8 +188,8 @@ int rc_spi_fd(int slave){
 *******************************************************************************/
 int rc_spi_close(int slave){
     if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
-        printf("ERROR: Can't use SPI on BBGW\n");
-        return -1;
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
     }
 	switch(slave){
 	case 1:
