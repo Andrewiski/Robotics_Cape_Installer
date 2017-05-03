@@ -98,6 +98,9 @@ echo "Enabling roboticscape Service"
 systemctl enable roboticscape
 # don't enable battery_monitor on BB Green Wireless
 if [ "$MODEL" == "TI AM335x BeagleBone Green Wireless" ]; then
+    echo "BBGW use noopp pru0 to avoid pins mv /lib/firmware/am335x-pru0-fw-bbgw /lib/firmware/am335x-pru0-fw"
+	rm /lib/firmware/am335x-pru0-fw
+	mv /lib/firmware/am335x-pru0-fw-bbgw /lib/firmware/am335x-pru0-fw
     # for now run script to build bbgw overlays as they are not in the debian image 
     echo "Building the BBGW overlays"
     bash device_tree/build_bbgw_robotics_capes.sh	
