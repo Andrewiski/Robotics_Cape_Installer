@@ -46,7 +46,7 @@ int rc_spi_init(ss_mode_t ss_mode, int spi_mode, int speed_hz, int slave){
 		return -1;
 	}
     if (rc_get_bb_model() != BB_GREEN_W  || rc_get_bb_model() != BB_GREEN_W_RC) {
-        printf("ERROR: Can't use SPI on BBGW\n");
+        printf("Warning: Can't use SPI on BBGW\n");
         return -1;
     }
 	if(rc_get_bb_model()!=BB_BLUE && slave==2 && ss_mode==SS_MODE_AUTO){
@@ -215,8 +215,8 @@ int rc_spi_close(int slave){
 *******************************************************************************/
 int rc_manual_select_spi_slave(int slave){
     if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
-        printf("ERROR: Can't use SPI on BBGW\n");
-        return -1;
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
     }
 	switch(slave){
 		case 1:
@@ -242,8 +242,8 @@ int rc_manual_select_spi_slave(int slave){
 *******************************************************************************/
 int rc_manual_deselect_spi_slave(int slave){
     if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
-        printf("ERROR: Can't use SPI on BBGW\n");
-        return -1;
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
     }
 	switch(slave){
 		case 1:
@@ -266,6 +266,10 @@ int rc_manual_deselect_spi_slave(int slave){
 *******************************************************************************/
 int rc_spi_send_bytes(char* data, int bytes, int slave){
 	int ret;
+	if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
+    }
 	// sanity checks
 	if(slave!=1 && slave!=2){
 		printf("ERROR: SPI slave must be 1 or 2\n");
@@ -299,6 +303,10 @@ int rc_spi_send_bytes(char* data, int bytes, int slave){
 *******************************************************************************/
 int rc_spi_read_bytes(char* data, int bytes, int slave){
 	int ret;
+	if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
+    }
 	// sanity checks
 	if(slave!=1 && slave!=2){
 		printf("ERROR: SPI slave must be 1 or 2\n");
@@ -334,6 +342,10 @@ int rc_spi_read_bytes(char* data, int bytes, int slave){
 *******************************************************************************/
 int rc_spi_transfer(char* tx_data, int tx_bytes, char* rx_data, int slave){
 	int ret;
+	if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
+    }
 	// sanity checks
 	if(slave!=1 && slave!=2){
 		printf("ERROR: SPI slave must be 1 or 2\n");
@@ -367,6 +379,10 @@ int rc_spi_transfer(char* tx_data, int tx_bytes, char* rx_data, int slave){
 * functionality, use spi1_send_bytes() to send a byte string of your choosing.
 *******************************************************************************/
 int rc_spi_write_reg_byte(char reg_addr, char data, int slave){
+	if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
+    }
 	// sanity checks
 	if(slave!=1 && slave!=2){
 		printf("ERROR: SPI slave must be 1 or 2\n");
@@ -399,6 +415,10 @@ int rc_spi_write_reg_byte(char reg_addr, char data, int slave){
 * ICs. 
 *******************************************************************************/
 char rc_spi_read_reg_byte(char reg_addr, int slave){
+	if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
+    }
 	// sanity checks
 	if(slave!=1 && slave!=2){
 		printf("ERROR: SPI slave must be 1 or 2\n");
@@ -432,6 +452,10 @@ char rc_spi_read_reg_byte(char reg_addr, int slave){
 *******************************************************************************/
 int rc_spi_read_reg_bytes(char reg_addr, char* data, int bytes, int slave){
 	int ret;
+	if (rc_get_bb_model() != BB_GREEN_W || rc_get_bb_model() != BB_GREEN_W_RC) {
+        printf("Warning: Can't use SPI on BBGW\n");
+        return 0;
+    }
 	// sanity checks
 	if(slave!=1 && slave!=2){
 		printf("ERROR: SPI slave must be 1 or 2\n");
