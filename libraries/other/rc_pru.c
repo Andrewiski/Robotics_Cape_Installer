@@ -51,17 +51,15 @@ int initialize_pru(){
 	}
 
 	// if pru0 is not loaded, load it
-    //BBGW has a conflivt with PRU0 so don't load if BBGW
+    //BBGW has a conflict with PRU0 so don't load if BBGW
     
-	if(rc_get_bb_model() != BB_GREEN_W && rc_get_bb_model() != BB_GREEN_W_RC && access(PRU0_UEVENT, F_OK)!=0){
+	if(access(PRU0_UEVENT, F_OK)!=0){
 		if(write(bind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
 			printf("ERROR: pru0 bind failed\n");
 			return -1;
 		}
     }
-    else {
-        printf("Warning: pru0 not Loaded on Beagle Bone Green Wireless\n");
-    }
+    
 	// if pru1 is not loaded, load it
 	if(access(PRU1_UEVENT, F_OK)!=0){
 		if(write(bind_fd, PRU1_NAME, PRU_NAME_LEN)<0){
@@ -125,7 +123,7 @@ int restart_pru(){
 
 
 	// if pru0 is loaded, unload it
-	if(rc_get_bb_model() != BB_GREEN_W && rc_get_bb_model() != BB_GREEN_W_RC &&  access(PRU0_UEVENT, F_OK)==0){
+	if(access(PRU0_UEVENT, F_OK)==0){
 		//printf("unbinding pru0\n");
 		if(write(unbind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
 			printf("ERROR: pru0 unbind failed\n");
@@ -142,13 +140,11 @@ int restart_pru(){
 	}
 
 	// now bind both
-	if(rc_get_bb_model() != BB_GREEN_W && rc_get_bb_model() != BB_GREEN_W_RC &&  write(bind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
+	if( write(bind_fd, PRU0_NAME, PRU_NAME_LEN)<0){
 		printf("ERROR: pru0 bind failed\n");
 		return -1;
     }
-    else {
-        printf("Warning: pru0 bind no avalible Beagle Bone green Wireless\n");
-    }
+    
 	if(write(bind_fd, PRU1_NAME, PRU_NAME_LEN)<0){
 		printf("ERROR: pru1 bind failed\n");
 		return -1;
@@ -166,9 +162,6 @@ int restart_pru(){
 * returns the encoder position or -1 if there was a problem.
 *******************************************************************************/
 int get_pru_encoder_pos(){
-    if (rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) {
-        return 0;
-    }
 	if(prusharedMem_32int_ptr == NULL) return -1;
 	else return (int) prusharedMem_32int_ptr[CNT_OFFSET/4];
 }
@@ -179,9 +172,6 @@ int get_pru_encoder_pos(){
 * Set the encoder position, return 0 on success, -1 on failure.
 *******************************************************************************/
 int set_pru_encoder_pos(int val){
-    if (rc_get_bb_model() == BB_GREEN_W || rc_get_bb_model() == BB_GREEN_W_RC) {
-        return 0;
-    }
 	if(prusharedMem_32int_ptr == NULL) return -1;
 	else prusharedMem_32int_ptr[CNT_OFFSET/4] = val;
 	return 0;
