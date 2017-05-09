@@ -5,8 +5,36 @@ For BeagleBone Black and BeagleBone Blue running Debian Jessie.
 Installation instructions and user manual can be found here:
 http://strawsondesign.com/#!manual-install
 
+Andrewiski GitHub Changed include changed to avoid Pin conflict on the BBGW.  
 
+Note that phyicaly you can not use the Robotics Cape on BBGW the USB headers are in the way I am only reusing the library.
 
+What is lost from Beagle Bone Black Wireless to Beagle Bone Green is as follows.
 
+Motor Encoder 2 and PRU Encoder 0 leaving only two motor encoders working Encoder 0 and Encoder 1
+No SPI is avalible on BBGW as used by BBGW Bluetooth
+No Motor Standby Pin used to enable the BBGW 
+No Battery LEDS in conflict with the WIFI data transfer.
+Had to move MDIR1A to pin P8_31  #define MDIR1A_BBGW 10  //gpio0.10  P8_31
 
+Sheet 0 BBGW schematic. (https://github.com/SeeedDocument/BeagleBone_Green_Wireless/blob/master/resources/BeagleBone_Green%20Wireless_V1.0_SCH_20160314.pdf )
+The pins on the sheet with 3,9 means page 3 and 9, page 9 is 40 pin headers and are in conflict . 
+Having Conflicts on MDIR_1A means I am down to 3 motors but I remapped MDIR_1A on BBGW to Pin in software to a different open pin so I still have 4 motors. I think P8_31 and P8_32 are open Uart5 CTS/RTS.
+
+Updated List of Conflict Pins that I found are as follows
+Pin BBWG Robotics Cape
+P8_11 WL_SDIO_D1 QEB2B
+P8_12 WL_SDIO_D0 QEB2A
+P8_14 WL_EN BAT_LED_4
+P8_15 WL_SDIO_D3 PRU_ENC_A
+P8_16 WL_SDIO_D2 PRU_ENC_B
+P8_17 WL_IRQ BATT_LED_1
+P8_18 WL_SDIO_CLK BATT_LED_2
+P8_26 WL_Level_Shifter_OE BATT_LED_3
+P9_12 BT_EN MDIR_1A
+P9_28 BT_AUD_IN SPI1_CS0
+P9_29 BT_AUD_FSYNC SPI1_D0
+P9_30 BT_AUD_OUT SPI1_D1
+P9_31 BT_AUD_CLK SPI1_SCLK
+P9_41 WL_SLOW_CLK MOT_STBY
 
